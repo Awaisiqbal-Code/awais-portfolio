@@ -352,75 +352,147 @@ const Hero = ({ onExplore, isMuted, toggleSound }) => {
       )}
 
       {/* ── HOLOGRAPHIC PORTAL OVERLAY (RIGHT) ── */}
+      {/* ── PORTAL + PERSON UNIFIED CONTAINER ── */}
       {!isMobile && (
-        <div style={{
-          position: 'absolute',
-          top: '50%',
-          right: '8%',
-          transform: 'translateY(-50%)',
-          width: '380px',
-          height: '380px',
-          pointerEvents: 'none',
-          zIndex: 4,
-          opacity: 0.65,
-        }}>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.88 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.6, duration: 1, type: 'spring', stiffness: 70 }}
+          style={{
+            position: 'absolute',
+            top: '50%',
+            right: '6%',
+            transform: 'translateY(-52%)',
+            width: '420px',
+            height: '420px',
+            zIndex: 8,
+          }}
+        >
           {/* Energy pulse waves */}
           {[0, 1.3, 2.6].map((d, i) => (
             <div key={i} style={{
-              position: 'absolute', inset: '10%', borderRadius: '50%',
-              border: '1px solid rgba(0,255,255,0.2)',
+              position: 'absolute', inset: '5%', borderRadius: '50%',
+              border: '1px solid rgba(0,255,255,0.18)',
               animation: 'waveOut 4s ease-out infinite', animationDelay: `${d}s`,
+              pointerEvents: 'none',
             }} />
           ))}
-          {/* Outer ring */}
+
+          {/* Outer spinning ring */}
           <div style={{
-            position: 'absolute', inset: 0, borderRadius: '50%', border: '2px solid transparent',
+            position: 'absolute', inset: 0, borderRadius: '50%', border: '2.5px solid transparent',
             background: 'linear-gradient(#03010f,#03010f) padding-box, conic-gradient(from 0deg, #00ffff, #7b61ff, #ff00cc, #00d4ff, #7b61ff, #00ffff) border-box',
             animation: 'portalSpin 10s linear infinite',
-            boxShadow: '0 0 40px rgba(0,255,255,0.35), 0 0 80px rgba(123,97,255,0.2), inset 0 0 30px rgba(0,255,255,0.1)',
+            boxShadow: '0 0 50px rgba(0,255,255,0.4), 0 0 100px rgba(123,97,255,0.25), inset 0 0 40px rgba(0,255,255,0.1)',
+            pointerEvents: 'none',
           }} />
-          {/* Mid ring */}
+
+          {/* Counter-spinning mid ring */}
           <div style={{
-            position: 'absolute', inset: '20px', borderRadius: '50%',
+            position: 'absolute', inset: '22px', borderRadius: '50%',
             border: '1.5px solid transparent',
             background: 'linear-gradient(#03010f,#03010f) padding-box, conic-gradient(from 180deg, #7b61ff, #00ffff, #ff00cc, #7b61ff) border-box',
             animation: 'portalSpin 15s linear infinite reverse',
+            pointerEvents: 'none',
           }} />
-          {/* Inner ring */}
+
+          {/* Subtle inner ring */}
           <div style={{
-            position: 'absolute', inset: '40px', borderRadius: '50%',
-            border: '1px solid rgba(123,97,255,0.4)',
+            position: 'absolute', inset: '44px', borderRadius: '50%',
+            border: '1px solid rgba(123,97,255,0.35)',
             animation: 'portalSpin 24s linear infinite',
+            pointerEvents: 'none',
           }} />
-          {/* Core glow */}
+
+          {/* Core deep-space glow */}
           <div style={{
-            position: 'absolute', inset: '70px', borderRadius: '50%',
-            background: 'radial-gradient(circle at 40% 40%, rgba(0,255,255,0.2) 0%, rgba(123,97,255,0.15) 50%, rgba(0,0,20,0.6) 100%)',
-            boxShadow: '0 0 50px rgba(0,255,255,0.25), inset 0 0 50px rgba(123,97,255,0.15)',
+            position: 'absolute', inset: '75px', borderRadius: '50%',
+            background: 'radial-gradient(circle at center, rgba(0,10,30,0.9) 0%, rgba(0,0,15,0.97) 100%)',
+            boxShadow: '0 0 60px rgba(0,255,255,0.2), inset 0 0 60px rgba(123,97,255,0.2)',
             animation: 'portalPulse 3s ease-in-out infinite',
+            pointerEvents: 'none',
           }} />
+
           {/* Rotating orbital dots */}
           {Array.from({ length: 8 }, (_, i) => (
             <motion.div key={i}
               animate={{ rotate: 360 }}
               transition={{ duration: 6 + i * 1.5, repeat: Infinity, ease: 'linear' }}
-              style={{ position: 'absolute', inset: 0, borderRadius: '50%' }}
+              style={{ position: 'absolute', inset: 0, borderRadius: '50%', pointerEvents: 'none' }}
             >
               <div style={{
                 position: 'absolute', top: '50%',
-                left: `${48 + 46 * Math.cos((i / 8) * Math.PI * 2)}%`,
+                left: `${48 + 47 * Math.cos((i / 8) * Math.PI * 2)}%`,
                 width: '4px', height: '4px', borderRadius: '50%',
                 background: i % 2 === 0 ? 'rgba(0,255,255,0.9)' : 'rgba(123,97,255,0.9)',
-                boxShadow: i % 2 === 0 ? '0 0 8px rgba(0,255,255,0.8)' : '0 0 8px rgba(123,97,255,0.8)',
+                boxShadow: i % 2 === 0 ? '0 0 8px rgba(0,255,255,0.9)' : '0 0 8px rgba(123,97,255,0.9)',
                 transform: 'translate(-50%,-50%)',
               }} />
             </motion.div>
           ))}
-        </div>
-      )}
 
-      {/* ── PORTRAIT AVATAR (REPLACED SILHOUETTE) ── */}
-      {!isMobile && <HolographicFrame />}
+          {/* ── PERSON STANDING INSIDE PORTAL ── */}
+          <div style={{
+            position: 'absolute',
+            bottom: '-8%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '195px',
+            height: '390px',
+            zIndex: 10,
+            overflow: 'hidden',
+          }}>
+            {/* Holographic scan line sweeping over person */}
+            <div style={{
+              position: 'absolute',
+              top: 0, left: 0, right: 0,
+              height: '3px',
+              background: 'linear-gradient(90deg, transparent, rgba(0,255,255,0.9), transparent)',
+              boxShadow: '0 0 12px rgba(0,255,255,0.9)',
+              animation: 'scanSlide 3s linear infinite',
+              zIndex: 4,
+            }} />
+
+            {/* Person image — mix-blend removes white bg */}
+            <img
+              src={userPhoto}
+              alt="Awais Iqbal"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                objectPosition: 'center top',
+                mixBlendMode: 'multiply',
+                filter: 'contrast(1.25) brightness(1.15) saturate(1.2) drop-shadow(0 0 12px rgba(0,255,255,0.5)) drop-shadow(0 0 30px rgba(123,97,255,0.4))',
+              }}
+            />
+
+            {/* Bottom fade: person blends into the ground glow */}
+            <div style={{
+              position: 'absolute',
+              bottom: 0, left: 0, right: 0,
+              height: '80px',
+              background: 'linear-gradient(to top, rgba(2,1,10,1) 0%, transparent 100%)',
+              zIndex: 5,
+            }} />
+          </div>
+
+          {/* Ground energy glow under feet */}
+          <div style={{
+            position: 'absolute',
+            bottom: '-10px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '160px',
+            height: '25px',
+            borderRadius: '50%',
+            background: 'radial-gradient(ellipse, rgba(0,255,255,0.5) 0%, transparent 70%)',
+            filter: 'blur(8px)',
+            zIndex: 9,
+            pointerEvents: 'none',
+          }} />
+        </motion.div>
+      )}
 
       {/* ── HERO CONTENT COLUMN (LEFT) ── */}
       <div style={{
