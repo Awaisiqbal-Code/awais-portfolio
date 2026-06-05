@@ -20,6 +20,7 @@ import ContactPortal from './components/ContactPortal';
 import AIOrb from './components/AIOrb';
 import CursorEffect from './components/CursorEffect';
 import Footer from './components/Footer';
+import Navbar from './components/Navbar';
 
 import avatarImg from './assets/avatar.jpg';
 
@@ -133,40 +134,12 @@ function App() {
 
             {/* Main scroll layout content overlay */}
             <div style={{ position: 'relative', zIndex: 10 }}>
-              {/* Header / Logo click trigger */}
-              <div 
-                onClick={handleAvatarClick}
-                className="header-logo-container"
-              >
-                {/* Small circular profile pic */}
-                <div
-                  className="header-logo-avatar"
-                  style={{
-                    border: devMode ? '2px solid var(--primary-glow)' : '2px solid rgba(255, 255, 255, 0.3)',
-                    boxShadow: devMode ? '0 0 10px var(--primary-glow)' : '0 0 5px rgba(0, 255, 255, 0.1)',
-                  }}
-                >
-                  <img
-                    src={avatarImg}
-                    alt="Awais Iqbal"
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                    }}
-                  />
-                </div>
-                
-                <span
-                  className="header-logo-text"
-                  style={{
-                    color: devMode ? 'var(--primary-glow)' : '#fff',
-                    textShadow: devMode ? '0 0 10px var(--primary-glow)' : 'none',
-                  }}
-                >
-                  {devMode ? 'SYS_DEV_MODE_ON' : 'AI.'}
-                </span>
-              </div>
+              {/* Top Navigation Bar with Logo */}
+              <Navbar 
+                devMode={devMode} 
+                handleAvatarClick={handleAvatarClick} 
+                avatarImg={avatarImg} 
+              />
 
               {/* Sections */}
               <Hero 
