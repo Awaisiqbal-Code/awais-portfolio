@@ -6,6 +6,7 @@ import {
 } from 'react-icons/fa';
 import heroBg from '../assets/hero-bg.png';
 import userPhoto from '../assets/user-photo.png';
+import holoBrain from '../assets/holographic-brain.png';
 
 /* ── Seeded RNG & particles ── */
 const rng = (seed) => { let s = seed; return () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; }; };
@@ -431,7 +432,42 @@ const Hero = ({ onExplore, isMuted, toggleSound }) => {
             </motion.div>
           ))}
 
-          {/* Portal stands empty, highlighting the high-tech energy circles */}
+          {/* ── HOLOGRAPHIC BRAIN INSIDE PORTAL ── */}
+          <motion.div
+            animate={{ y: [-8, 8, -8], scale: [1, 1.03, 1] }}
+            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+            style={{
+              position: 'absolute',
+              inset: '5%',
+              zIndex: 10,
+              pointerEvents: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            {/* Scan line sweeping over brain */}
+            <div style={{
+              position: 'absolute',
+              top: 0, left: 0, right: 0,
+              height: '2px',
+              background: 'linear-gradient(90deg, transparent, rgba(0,255,255,0.7), transparent)',
+              boxShadow: '0 0 10px rgba(0,255,255,0.7)',
+              animation: 'scanSlide 4s linear infinite',
+              zIndex: 4,
+            }} />
+            <img
+              src={holoBrain}
+              alt="Holographic Brain"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain',
+                mixBlendMode: 'screen',
+                filter: 'brightness(1.1) contrast(1.1) drop-shadow(0 0 20px rgba(0,255,255,0.5)) drop-shadow(0 0 40px rgba(123,97,255,0.3))',
+              }}
+            />
+          </motion.div>
         </motion.div>
       )}
 
