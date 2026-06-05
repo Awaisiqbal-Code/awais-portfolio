@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
-  FaLinkedin, FaGithub, FaFacebook, FaEnvelope,
+  FaLinkedin, FaGithub, FaFacebook, FaEnvelope, FaInstagram,
   FaVolumeUp, FaVolumeMute, FaArrowRight, FaCommentAlt
 } from 'react-icons/fa';
 import heroBg from '../assets/hero-bg.png';
@@ -98,9 +98,10 @@ const Hero = ({ onExplore, isMuted, toggleSound }) => {
 
   const socialLinks = [
     { href: 'https://github.com/Awaisiqbal-Code', icon: <FaGithub />, color: '#fff', label: 'GitHub', delay: 0.5 },
-    { href: 'https://linkedin.com/in/hafiz-awais-iqbal', icon: <FaLinkedin />, color: '#0077B5', label: 'LinkedIn', delay: 0.6 },
-    { href: 'https://facebook.com', icon: <FaFacebook />, color: '#1877F2', label: 'Facebook', delay: 0.7 },
-    { href: 'mailto:hafizawaisiqbal40@gmail.com', icon: <FaEnvelope />, color: '#EA4335', label: 'Email', delay: 0.8 },
+    { href: 'https://www.linkedin.com/in/awais-iqbal-8529023b0', icon: <FaLinkedin />, color: '#0077B5', label: 'LinkedIn', delay: 0.6 },
+    { href: 'https://www.facebook.com/profile.php?id=61584604024333', icon: <FaFacebook />, color: '#1877F2', label: 'Facebook', delay: 0.7 },
+    { href: 'https://instagram.com', icon: <FaInstagram />, color: '#E1306C', label: 'Instagram', delay: 0.75 },
+    { href: 'mailto:connect.awaisiqbal@gmail.com', icon: <FaEnvelope />, color: '#EA4335', label: 'Email', delay: 0.8 },
   ];
 
   const nameFontSize = isMobile ? 'clamp(2.4rem, 10vw, 4.2rem)' : 'clamp(3.8rem, 5.5vw, 6.5rem)';

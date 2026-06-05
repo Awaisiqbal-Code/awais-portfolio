@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaLinkedin, FaGithub, FaEnvelope, FaChevronUp, FaFacebook, FaWhatsapp } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaEnvelope, FaChevronUp, FaFacebook, FaWhatsapp, FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {
   const handleScrollToTop = () => {
@@ -116,6 +116,20 @@ const Footer = () => {
           onMouseLeave={(e) => e.target.style.color = 'rgba(255,255,255,0.5)'}
         >
           <FaFacebook />
+        </a>
+        <a
+          href="https://instagram.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            color: 'rgba(255,255,255,0.5)',
+            fontSize: '1.3rem',
+            transition: 'var(--transition-fast)',
+          }}
+          onMouseEnter={(e) => e.target.style.color = 'var(--primary-glow)'}
+          onMouseLeave={(e) => e.target.style.color = 'rgba(255,255,255,0.5)'}
+        >
+          <FaInstagram />
         </a>
         <a
           href="https://wa.me/923224214280"
