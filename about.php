@@ -28,7 +28,7 @@ include 'includes/nav.php';
                 <h5 class="reveal-up" style="color: var(--accent-purple); text-transform: uppercase; letter-spacing: 3px; font-weight: 600; margin-bottom: 20px;">Who I Am</h5>
                 <h2 class="reveal-up" style="font-size: 3.5rem; margin-bottom: 30px;">I Design & Build <br><span class="text-gradient">Digital Masterpieces</span></h2>
                 <p class="reveal-up" style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; margin-bottom: 30px;">
-                     I am a Junior Full-Stack Web Developer and a Class 9 student with a deep passion for creating high-performance, visually stunning web applications. I mix the logic of backend systems with the beauty of cinematic frontend animations.
+                     I am a Junior Full-Stack Web Developer with a deep passion for creating high-performance, visually stunning web applications. I mix the logic of backend systems with the beauty of cinematic frontend animations.
                 </p>
                 
                 <div class="stagger-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px;">
@@ -74,7 +74,7 @@ include 'includes/nav.php';
             <div class="reveal-up" style="display: flex; justify-content: flex-start; width: 50%; margin-left: 50%; padding-left: 50px; position: relative;">
                 <div class="glass-card" style="width: 100%;">
                     <span style="color: var(--accent-pink); font-weight: 700;">2022 - 2024</span>
-                    <h4 style="margin: 10px 0;">Class 9 Student</h4>
+                    <h4 style="margin: 10px 0;">Matriculation Studies</h4>
                     <p style="font-size: 0.9rem; color: var(--text-muted);">Exploring advanced computer science concepts and mathematical algorithms.</p>
                 </div>
                 <div style="position: absolute; left: -6px; top: 20px; width: 12px; height: 12px; background: var(--accent-pink); border-radius: 50%; box-shadow: 0 0 15px var(--accent-pink);"></div>
