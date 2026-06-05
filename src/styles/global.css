@@ -1,0 +1,337 @@
+/* --------------------------------------------------------------------------
+   AWAIS IQBAL – THE LIVING DEVELOPER PORTFOLIO DESIGN SYSTEM
+-------------------------------------------------------------------------- */
+
+:root {
+  /* Color Palette */
+  --bg-color: #050816;
+  --primary-glow: #00ffff;
+  --secondary-glow: #7b61ff;
+  --accent-gold: #ffd700;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-glow-cyan: 0 0 20px rgba(0, 255, 255, 0.15);
+  --card-glow-purple: 0 0 20px rgba(123, 97, 255, 0.15);
+  --card-glow-gold: 0 0 20px rgba(255, 215, 0, 0.2);
+
+  /* Fonts */
+  --font-title: 'Orbitron', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-urdu: 'Noto Nastaliq Urdu', serif;
+
+  /* Custom Transitions */
+  --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-fast: all 0.2s ease;
+}
+
+/* Reset & Scrollbar */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+html, body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-glow) var(--bg-color);
+  scroll-behavior: auto; /* Handled by Lenis */
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-glow);
+  box-shadow: 0 0 10px var(--primary-glow);
+}
+
+/* Background Grids & Scans */
+.app-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  z-index: 1;
+}
+
+.scanlines-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.06),
+    rgba(0, 255, 0, 0.02),
+    rgba(0, 0, 255, 0.06)
+  );
+  background-size: 100% 4px, 6px 100%;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.crt-flicker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(18, 16, 16, 0.1);
+  opacity: 0;
+  z-index: 9998;
+  pointer-events: none;
+  animation: crtFlicker 0.15s infinite;
+}
+
+/* Glassmorphism Cards */
+.glass-panel {
+  background: rgba(5, 8, 22, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: var(--transition-smooth);
+}
+
+.glass-panel:hover {
+  border-color: rgba(0, 255, 255, 0.3);
+  box-shadow: var(--card-glow-cyan);
+}
+
+.glass-panel.purple-glow:hover {
+  border-color: rgba(123, 97, 255, 0.3);
+  box-shadow: var(--card-glow-purple);
+}
+
+.glass-panel.gold-glow:hover {
+  border-color: rgba(255, 215, 0, 0.35);
+  box-shadow: var(--card-glow-gold);
+}
+
+/* Neon Borders & Text */
+.neon-text-cyan {
+  color: var(--primary-glow);
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.3);
+  font-family: var(--font-title);
+}
+
+.neon-text-purple {
+  color: var(--secondary-glow);
+  text-shadow: 0 0 10px rgba(123, 97, 255, 0.6), 0 0 20px rgba(123, 97, 255, 0.3);
+  font-family: var(--font-title);
+}
+
+.neon-text-gold {
+  color: var(--accent-gold);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6), 0 0 20px rgba(255, 215, 0, 0.3);
+  font-family: var(--font-title);
+}
+
+/* Section Layouts */
+section {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 10%;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.section-title {
+  font-family: var(--font-title);
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  letter-spacing: 2px;
+}
+
+/* Custom Interactive Cursor Light */
+.cursor-beam {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.05) 0%, rgba(123, 97, 255, 0.02) 50%, transparent 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+}
+
+/* Keyframes */
+@keyframes crtFlicker {
+  0% { opacity: 0.015; }
+  50% { opacity: 0.002; }
+  100% { opacity: 0.012; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; box-shadow: 0 0 15px rgba(0, 255, 255, 0.2); }
+  50% { opacity: 1; box-shadow: 0 0 25px rgba(0, 255, 255, 0.5); }
+}
+
+/* Glitch Text Classes */
+.glitch {
+  position: relative;
+  animation: glitch 1s linear infinite;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-color);
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 #ff00ff;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 #00ffff, 0 2px #ff00ff;
+  clip: rect(85px, 450px, 140px, 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(15px, 9999px, 66px, 0); }
+  10% { clip: rect(34px, 9999px, 5px, 0); }
+  20% { clip: rect(89px, 9999px, 98px, 0); }
+  30% { clip: rect(12px, 9999px, 44px, 0); }
+  40% { clip: rect(62px, 9999px, 91px, 0); }
+  50% { clip: rect(41px, 9999px, 17px, 0); }
+  60% { clip: rect(98px, 9999px, 32px, 0); }
+  70% { clip: rect(5px, 9999px, 78px, 0); }
+  80% { clip: rect(87px, 9999px, 54px, 0); }
+  90% { clip: rect(23px, 9999px, 61px, 0); }
+  100% { clip: rect(45px, 9999px, 90px, 0); }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip: rect(76px, 9999px, 11px, 0); }
+  10% { clip: rect(12px, 9999px, 98px, 0); }
+  20% { clip: rect(54px, 9999px, 5px, 0); }
+  30% { clip: rect(89px, 9999px, 62px, 0); }
+  40% { clip: rect(3px, 9999px, 45px, 0); }
+  50% { clip: rect(92px, 9999px, 18px, 0); }
+  60% { clip: rect(14px, 9999px, 77px, 0); }
+  70% { clip: rect(67px, 9999px, 3px, 0); }
+  80% { clip: rect(32px, 9999px, 90px, 0); }
+  90% { clip: rect(81px, 9999px, 43px, 0); }
+  100% { clip: rect(5px, 9999px, 54px, 0); }
+}
+
+/* Header Logo Layout */
+.header-logo-container {
+  position: fixed;
+  top: 30px;
+  left: 40px;
+  z-index: 1000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition-smooth);
+}
+
+.header-logo-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(5, 8, 22, 0.8);
+  transition: all 0.3s ease;
+}
+
+.header-logo-text {
+  font-family: var(--font-title);
+  font-weight: 900;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+/* Responsiveness & Mobile Media Queries */
+@media (max-width: 768px) {
+  .header-logo-container {
+    top: 15px !important;
+    left: 15px !important;
+    gap: 6px !important;
+  }
+  
+  .header-logo-avatar {
+    width: 24px !important;
+    height: 24px !important;
+  }
+  
+  .header-logo-text {
+    font-size: 0.75rem !important;
+  }
+
+  section {
+    padding: 3rem 1rem !important;
+    min-height: auto !important;
+  }
+  
+  .about-grid,
+  .contact-grid,
+  .skills-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+  
+  .glass-panel {
+    padding: 1.5rem !important;
+  }
+  
+  .section-title {
+    font-size: 2rem !important;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+  }
+}
+

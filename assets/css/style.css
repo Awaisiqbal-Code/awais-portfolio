@@ -1,0 +1,106 @@
+/* Main Stylesheet for Awais Portfolio */
+
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: var(--section-padding);
+}
+
+/* Typography Enhancements */
+h1 {
+    font-size: 4rem;
+    letter-spacing: -2px;
+}
+
+h2 {
+    font-size: 3rem;
+    letter-spacing: -1px;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-main {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: var(--transition-base);
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary:hover,
+.btn-main:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(139, 92, 246, 0.4);
+}
+
+/* Layout Utilities */
+.d-flex {
+    display: flex;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.grid {
+    display: grid;
+}
+
+/* Section Header */
+.section-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.section-header h2 {
+    margin-top: 15px;
+}
+
+/* Form Styles Extension */
+.focused label {
+    color: var(--accent-blue) !important;
+    transform: translateY(-5px);
+}
+
+/* Responsive fixes */
+@media (max-width: 992px) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    section {
+        padding: 60px 0;
+    }
+
+    .hero-btns {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-main,
+    .btn-outline {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+}
