@@ -50,23 +50,28 @@ function App() {
   useEffect(() => {
     if (introActive) return;
 
+    // Only enable Lenis smooth scrolling on desktop screens (>= 1024px)
+    const isDesktop = window.innerWidth >= 1024;
+    if (!isDesktop) return;
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      syncTouch: true
+      syncTouch: false // Keep native touch behavior on mobile/touch screens
     });
 
     lenis.on('scroll', ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
+    const updateRaf = (time) => {
       lenis.raf(time * 1000);
-    });
+    };
 
+    gsap.ticker.add(updateRaf);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
       lenis.destroy();
-      gsap.ticker.remove(lenis.raf);
+      gsap.ticker.remove(updateRaf);
     };
   }, [introActive]);
 

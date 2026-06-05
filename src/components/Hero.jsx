@@ -5,7 +5,6 @@ import {
   FaVolumeUp, FaVolumeMute, FaArrowRight, FaCommentAlt
 } from 'react-icons/fa';
 import heroBg from '../assets/hero-bg.png';
-import userPhoto from '../assets/user-photo.png';
 import holoBrain from '../assets/holographic-brain.png';
 
 /* ── Seeded RNG & particles ── */
@@ -48,104 +47,7 @@ const TechChip = ({ icon, label, color, delay }) => (
   </motion.div>
 );
 
-/* ── Holographic Avatar Frame ── */
-const HolographicFrame = () => (
-  <motion.div
-    initial={{ opacity: 0, scale: 0.85, x: 50 }}
-    animate={{ opacity: 1, scale: 1, x: 0 }}
-    transition={{ delay: 0.8, duration: 0.8, type: 'spring', stiffness: 80 }}
-    style={{
-      position: 'absolute',
-      bottom: '10%',
-      right: '12%',
-      width: '210px',
-      height: '380px',
-      zIndex: 10,
-      borderRadius: '16px',
-      border: '1.5px solid rgba(0, 255, 255, 0.3)',
-      background: 'rgba(5, 8, 22, 0.65)',
-      backdropFilter: 'blur(12px)',
-      boxShadow: '0 0 30px rgba(0, 255, 255, 0.15), inset 0 0 20px rgba(0, 255, 255, 0.05)',
-      overflow: 'hidden',
-      display: 'flex',
-      flexDirection: 'column',
-    }}
-  >
-    {/* Tech scan lines */}
-    <div style={{
-      position: 'absolute',
-      inset: 0,
-      backgroundImage: 'linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px)',
-      backgroundSize: '100% 4px',
-      pointerEvents: 'none',
-      zIndex: 3,
-    }} />
 
-    {/* Holographic light sweep line */}
-    <div style={{
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      height: '3px',
-      background: 'linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.8), transparent)',
-      boxShadow: '0 0 10px rgba(0, 255, 255, 0.8)',
-      animation: 'scanSlide 3s linear infinite',
-      zIndex: 3,
-    }} />
-
-    {/* Cyber corner brackets */}
-    <div style={{ position: 'absolute', top: '8px', left: '8px', width: '8px', height: '8px', borderTop: '2px solid var(--primary-glow)', borderLeft: '2px solid var(--primary-glow)', zIndex: 3 }} />
-    <div style={{ position: 'absolute', top: '8px', right: '8px', width: '8px', height: '8px', borderTop: '2px solid var(--primary-glow)', borderRight: '2px solid var(--primary-glow)', zIndex: 3 }} />
-    <div style={{ position: 'absolute', bottom: '8px', left: '8px', width: '8px', height: '8px', borderBottom: '2px solid var(--primary-glow)', borderLeft: '2px solid var(--primary-glow)', zIndex: 3 }} />
-    <div style={{ position: 'absolute', bottom: '8px', right: '8px', width: '8px', height: '8px', borderBottom: '2px solid var(--primary-glow)', borderRight: '2px solid var(--primary-glow)', zIndex: 3 }} />
-
-    {/* Holographic color tint filter to blend the white background */}
-    <div style={{
-      position: 'absolute',
-      inset: 0,
-      background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(123, 97, 255, 0.25))',
-      mixBlendMode: 'color',
-      zIndex: 2,
-      pointerEvents: 'none',
-    }} />
-
-    {/* Portrait image */}
-    <img
-      src={userPhoto}
-      alt="Awais Iqbal"
-      style={{
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-        opacity: 0.9,
-        filter: 'brightness(1.1) contrast(1.1) saturate(1.1) drop-shadow(0 0 8px rgba(0,255,255,0.3))',
-        zIndex: 1,
-      }}
-    />
-
-    {/* Holographic status identifier tag */}
-    <div style={{
-      position: 'absolute',
-      bottom: '12px',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      padding: '4px 10px',
-      background: 'rgba(0, 10, 30, 0.85)',
-      border: '1px solid rgba(0, 255, 255, 0.3)',
-      borderRadius: '4px',
-      fontFamily: 'var(--font-title)',
-      fontSize: '0.48rem',
-      color: 'var(--primary-glow)',
-      letterSpacing: '1.5px',
-      whiteSpace: 'nowrap',
-      zIndex: 4,
-      boxShadow: '0 0 8px rgba(0,255,255,0.3)',
-    }}>
-      TRANS_ID: AWAIS_IQBAL
-    </div>
-  </motion.div>
-);
 
 const Hero = ({ onExplore, isMuted, toggleSound }) => {
   const [typedText, setTypedText] = useState('');
@@ -162,8 +64,8 @@ const Hero = ({ onExplore, isMuted, toggleSound }) => {
     'Building The Future',
   ];
 
-  const particles = useMemo(() => mkParticles(30, 77), []);
-  const stars = useMemo(() => mkParticles(50, 33), []);
+  const particles = useMemo(() => mkParticles(isMobile ? 0 : 25, 77), [isMobile]);
+  const stars = useMemo(() => mkParticles(isMobile ? 0 : 35, 33), [isMobile]);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);

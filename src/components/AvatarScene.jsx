@@ -102,16 +102,23 @@ const OrbitalParticles = ({ count = 250 }) => {
 };
 
 const AvatarScene = () => {
+  const [isMobile, setIsMobile] = useState(false);
   const [isLowPerformance, setIsLowPerformance] = useState(false);
 
   useEffect(() => {
     const checkPerformance = () => {
-      setIsLowPerformance(window.innerWidth < 768);
+      const width = window.innerWidth;
+      setIsMobile(width < 1024); // Disable WebGL entirely on mobile/tablet
+      setIsLowPerformance(width < 1280); // Disable heavy postprocessing on smaller screens
     };
     checkPerformance();
     window.addEventListener('resize', checkPerformance);
     return () => window.removeEventListener('resize', checkPerformance);
   }, []);
+
+  if (isMobile) {
+    return null;
+  }
 
   return (
     <div
@@ -140,7 +147,7 @@ const AvatarScene = () => {
         {/* Ambient starfield background */}
         <Stars radius={100} depth={50} count={isLowPerformance ? 500 : 2000} factor={4} saturation={0} fade speed={1} />
 
-        {/* Bloom / Postprocessing FX - Only enable on desktop */}
+        {/* Bloom / Postprocessing FX - Only enable on high-performance desktop */}
         {!isLowPerformance && (
           <EffectComposer>
             <Bloom luminanceThreshold={0.2} mipmapBlur intensity={1.2} />

@@ -340,3 +340,14 @@ section {
   }
 }
 
+/* Optimization for mobile and tablet touch devices */
+@media (max-width: 1024px) {
+  .crt-flicker {
+    animation: none !important;
+    display: none !important;
+  }
+  .scanlines-overlay {
+    display: none !important;
+  }
+}
+

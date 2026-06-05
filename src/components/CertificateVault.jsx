@@ -9,7 +9,6 @@ import pythonEssentials2 from '../assets/certificates/python-essentials-2.png';
 import digitalContent from '../assets/certificates/digital-content.png';
 import cybersecurity from '../assets/certificates/cybersecurity.png';
 import networkTechnician1 from '../assets/certificates/network-technician-1.png';
-import networkTechnician2 from '../assets/certificates/network-technician-2.png';
 import digitalSafety from '../assets/certificates/digital-safety.png';
 import compellingReports from '../assets/certificates/compelling-reports.png';
 import iotCisco from '../assets/certificates/iot-cisco.png';
