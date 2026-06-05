@@ -5,6 +5,7 @@ import {
   FaVolumeUp, FaVolumeMute, FaArrowRight, FaCommentAlt
 } from 'react-icons/fa';
 import heroBg from '../assets/hero-bg.png';
+import userPhoto from '../assets/user-photo.png';
 
 /* ── Seeded RNG & particles ── */
 const rng = (seed) => { let s = seed; return () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; }; };
@@ -43,6 +44,105 @@ const TechChip = ({ icon, label, color, delay }) => (
   >
     <span style={{ fontSize: '0.9rem', color }}>{icon}</span>
     <span style={{ fontFamily: 'var(--font-title)', fontSize: '0.52rem', color: 'rgba(255,255,255,0.7)', letterSpacing: '1px', textTransform: 'uppercase', fontWeight: 600 }}>{label}</span>
+  </motion.div>
+);
+
+/* ── Holographic Avatar Frame ── */
+const HolographicFrame = () => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.85, x: 50 }}
+    animate={{ opacity: 1, scale: 1, x: 0 }}
+    transition={{ delay: 0.8, duration: 0.8, type: 'spring', stiffness: 80 }}
+    style={{
+      position: 'absolute',
+      bottom: '10%',
+      right: '12%',
+      width: '210px',
+      height: '380px',
+      zIndex: 10,
+      borderRadius: '16px',
+      border: '1.5px solid rgba(0, 255, 255, 0.3)',
+      background: 'rgba(5, 8, 22, 0.65)',
+      backdropFilter: 'blur(12px)',
+      boxShadow: '0 0 30px rgba(0, 255, 255, 0.15), inset 0 0 20px rgba(0, 255, 255, 0.05)',
+      overflow: 'hidden',
+      display: 'flex',
+      flexDirection: 'column',
+    }}
+  >
+    {/* Tech scan lines */}
+    <div style={{
+      position: 'absolute',
+      inset: 0,
+      backgroundImage: 'linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px)',
+      backgroundSize: '100% 4px',
+      pointerEvents: 'none',
+      zIndex: 3,
+    }} />
+
+    {/* Holographic light sweep line */}
+    <div style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      height: '3px',
+      background: 'linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.8), transparent)',
+      boxShadow: '0 0 10px rgba(0, 255, 255, 0.8)',
+      animation: 'scanSlide 3s linear infinite',
+      zIndex: 3,
+    }} />
+
+    {/* Cyber corner brackets */}
+    <div style={{ position: 'absolute', top: '8px', left: '8px', width: '8px', height: '8px', borderTop: '2px solid var(--primary-glow)', borderLeft: '2px solid var(--primary-glow)', zIndex: 3 }} />
+    <div style={{ position: 'absolute', top: '8px', right: '8px', width: '8px', height: '8px', borderTop: '2px solid var(--primary-glow)', borderRight: '2px solid var(--primary-glow)', zIndex: 3 }} />
+    <div style={{ position: 'absolute', bottom: '8px', left: '8px', width: '8px', height: '8px', borderBottom: '2px solid var(--primary-glow)', borderLeft: '2px solid var(--primary-glow)', zIndex: 3 }} />
+    <div style={{ position: 'absolute', bottom: '8px', right: '8px', width: '8px', height: '8px', borderBottom: '2px solid var(--primary-glow)', borderRight: '2px solid var(--primary-glow)', zIndex: 3 }} />
+
+    {/* Holographic color tint filter to blend the white background */}
+    <div style={{
+      position: 'absolute',
+      inset: 0,
+      background: 'linear-gradient(135deg, rgba(0, 255, 255, 0.15), rgba(123, 97, 255, 0.25))',
+      mixBlendMode: 'color',
+      zIndex: 2,
+      pointerEvents: 'none',
+    }} />
+
+    {/* Portrait image */}
+    <img
+      src={userPhoto}
+      alt="Awais Iqbal"
+      style={{
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        opacity: 0.9,
+        filter: 'brightness(1.1) contrast(1.1) saturate(1.1) drop-shadow(0 0 8px rgba(0,255,255,0.3))',
+        zIndex: 1,
+      }}
+    />
+
+    {/* Holographic status identifier tag */}
+    <div style={{
+      position: 'absolute',
+      bottom: '12px',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      padding: '4px 10px',
+      background: 'rgba(0, 10, 30, 0.85)',
+      border: '1px solid rgba(0, 255, 255, 0.3)',
+      borderRadius: '4px',
+      fontFamily: 'var(--font-title)',
+      fontSize: '0.48rem',
+      color: 'var(--primary-glow)',
+      letterSpacing: '1.5px',
+      whiteSpace: 'nowrap',
+      zIndex: 4,
+      boxShadow: '0 0 8px rgba(0,255,255,0.3)',
+    }}>
+      TRANS_ID: AWAIS_IQBAL
+    </div>
   </motion.div>
 );
 
@@ -106,14 +206,17 @@ const Hero = ({ onExplore, isMuted, toggleSound }) => {
     <section id="hero" style={{
       position: 'relative',
       width: '100%',
-      height: '100vh',
-      overflow: 'hidden',
+      height: isMobile ? 'auto' : '100vh',
+      minHeight: '100vh',
+      overflow: isMobile ? 'visible' : 'hidden',
       display: 'flex',
       alignItems: 'center',
       justifyContent: isMobile ? 'center' : 'flex-start',
       background: '#02010a',
       paddingLeft: isMobile ? '5%' : '10%',
       paddingRight: isMobile ? '5%' : '8%',
+      paddingTop: isMobile ? '110px' : '40px',
+      paddingBottom: isMobile ? '70px' : '0px',
     }}>
       {/* ── KEYFRAMES ── */}
       <style>{`
@@ -128,6 +231,7 @@ const Hero = ({ onExplore, isMuted, toggleSound }) => {
         @keyframes subtitleGlow { 0%,100%{text-shadow:0 0 8px rgba(0,255,255,.3)} 50%{text-shadow:0 0 16px rgba(0,255,255,.7),0 0 32px rgba(0,255,255,.3)} }
         @keyframes gridMove     { from{background-position:0 0} to{background-position:50px 50px} }
         @keyframes cursor       { 0%,100%{opacity:1} 50%{opacity:0} }
+        @keyframes scanSlide    { 0%{top:-10%} 100%{top:110%} }
       `}</style>
 
       {/* ── BACKGROUND IMAGE ── */}
@@ -137,9 +241,9 @@ const Hero = ({ onExplore, isMuted, toggleSound }) => {
         zIndex: 0,
         backgroundImage: `url(${heroBg})`,
         backgroundSize: 'cover',
-        backgroundPosition: isMobile ? 'center' : 'right 20% center',
-        opacity: isMobile ? 0.35 : 0.55,
-        filter: isMobile ? 'blur(2px) brightness(0.6)' : 'none',
+        backgroundPosition: isMobile ? 'left 22% center' : 'right 20% center',
+        opacity: isMobile ? 0.22 : 0.55,
+        filter: isMobile ? 'blur(2px) brightness(0.45)' : 'none',
       }} />
 
       {/* ── OVERLAY DARK VIGNETTE ── */}
@@ -258,7 +362,7 @@ const Hero = ({ onExplore, isMuted, toggleSound }) => {
           height: '380px',
           pointerEvents: 'none',
           zIndex: 4,
-          opacity: 0.65, // Merges smoothly with background image portal
+          opacity: 0.65,
         }}>
           {/* Energy pulse waves */}
           {[0, 1.3, 2.6].map((d, i) => (
@@ -315,6 +419,9 @@ const Hero = ({ onExplore, isMuted, toggleSound }) => {
         </div>
       )}
 
+      {/* ── PORTRAIT AVATAR (REPLACED SILHOUETTE) ── */}
+      {!isMobile && <HolographicFrame />}
+
       {/* ── HERO CONTENT COLUMN (LEFT) ── */}
       <div style={{
         position: 'relative',
@@ -325,7 +432,6 @@ const Hero = ({ onExplore, isMuted, toggleSound }) => {
         justifyContent: 'center',
         width: isMobile ? '100%' : '58%',
         textAlign: isMobile ? 'center' : 'left',
-        paddingTop: isMobile ? '90px' : '40px',
       }}>
         {/* Status indicator badge */}
         <motion.div
@@ -601,94 +707,126 @@ const Hero = ({ onExplore, isMuted, toggleSound }) => {
             <TechChip key={i} {...tech} />
           ))}
         </div>
-      </div>
 
-      {/* ── SOUND CONTROL ── */}
-      <div style={{ position: 'absolute', bottom: '30px', right: '30px', zIndex: 30 }}>
-        <button onClick={toggleSound}
-          style={{
-            background: 'rgba(5, 8, 22, 0.45)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            borderRadius: '50%',
-            width: '40px',
-            height: '40px',
+        {/* Mobile Social Links in flow */}
+        {isMobile && (
+          <div style={{
             display: 'flex',
-            alignItems: 'center',
+            flexDirection: 'row',
+            gap: '14px',
+            marginTop: '30px',
             justifyContent: 'center',
-            color: '#fff',
-            cursor: 'pointer',
-            fontSize: '0.95rem',
-            backdropFilter: 'blur(10px)',
-            transition: 'all 0.3s ease',
-          }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(0,255,255,0.6)'; e.currentTarget.style.boxShadow = '0 0 12px rgba(0,255,255,0.3)'; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; e.currentTarget.style.boxShadow = 'none'; }}
-        >
-          {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
-        </button>
-      </div>
+            width: '100%',
+          }}>
+            {socialLinks.map((s, i) => (
+              <a key={i} href={s.href}
+                onClick={e => { e.preventDefault(); if (s.href.startsWith('mailto:')) window.location.href = s.href; else window.open(s.href, '_blank'); }}
+                title={s.label}
+                style={{
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  background: 'rgba(5, 8, 22, 0.5)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  color: s.color,
+                  fontSize: '1rem',
+                  boxShadow: `0 0 10px ${s.color}15`,
+                }}
+              >
+                {s.icon}
+              </a>
+            ))}
+          </div>
+        )}
 
-      {/* ── SCROLL DOWN INDICATOR ── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.5 }}
-        transition={{ delay: 2.2 }}
-        style={{
-          position: 'absolute',
-          bottom: '25px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '4px',
-          zIndex: 25,
-          pointerEvents: 'none',
-        }}
-      >
-        <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.52rem', letterSpacing: '2.5px', color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase' }}>Scroll</span>
-        <div style={{ width: '16px', height: '24px', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '8px', display: 'flex', justifyContent: 'center' }}>
-          <motion.div
-            animate={{ y: [0, 6, 0], opacity: [1, 0.2, 1] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-            style={{ width: '2px', height: '4px', background: 'var(--primary-glow)', borderRadius: '1.5px', marginTop: '4px' }}
-          />
-        </div>
-      </motion.div>
-
-      {/* ── MOBILE SOCIALS (BOTTOM) ── */}
-      {isMobile && (
-        <div style={{
-          position: 'absolute',
-          bottom: '80px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          flexDirection: 'row',
-          gap: '16px',
-          zIndex: 20,
-        }}>
-          {socialLinks.map((s, i) => (
-            <a key={i} href={s.href}
-              onClick={e => { e.preventDefault(); if (s.href.startsWith('mailto:')) window.location.href = s.href; else window.open(s.href, '_blank'); }}
-              title={s.label}
+        {/* Mobile Sound Control in flow */}
+        {isMobile && (
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '25px',
+            width: '100%',
+          }}>
+            <button onClick={toggleSound}
               style={{
-                width: '34px',
-                height: '34px',
-                borderRadius: '8px',
+                background: 'rgba(5, 8, 22, 0.45)',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                background: 'rgba(5, 8, 22, 0.6)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                color: s.color,
-                fontSize: '0.9rem',
+                color: '#fff',
+                cursor: 'pointer',
+                fontSize: '0.95rem',
+                backdropFilter: 'blur(10px)',
               }}
             >
-              {s.icon}
-            </a>
-          ))}
+              {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* ── SOUND CONTROL (DESKTOP) ── */}
+      {!isMobile && (
+        <div style={{ position: 'absolute', bottom: '30px', right: '30px', zIndex: 30 }}>
+          <button onClick={toggleSound}
+            style={{
+              background: 'rgba(5, 8, 22, 0.45)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderRadius: '50%',
+              width: '40px',
+              height: '40px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#fff',
+              cursor: 'pointer',
+              fontSize: '0.95rem',
+              backdropFilter: 'blur(10px)',
+              transition: 'all 0.3s ease',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(0,255,255,0.6)'; e.currentTarget.style.boxShadow = '0 0 12px rgba(0,255,255,0.3)'; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; e.currentTarget.style.boxShadow = 'none'; }}
+          >
+            {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
+          </button>
         </div>
+      )}
+
+      {/* ── SCROLL DOWN INDICATOR (DESKTOP) ── */}
+      {!isMobile && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.5 }}
+          transition={{ delay: 2.2 }}
+          style={{
+            position: 'absolute',
+            bottom: '25px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '4px',
+            zIndex: 25,
+            pointerEvents: 'none',
+          }}
+        >
+          <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.52rem', letterSpacing: '2.5px', color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase' }}>Scroll</span>
+          <div style={{ width: '16px', height: '24px', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '8px', display: 'flex', justifyContent: 'center' }}>
+            <motion.div
+              animate={{ y: [0, 6, 0], opacity: [1, 0.2, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+              style={{ width: '2px', height: '4px', background: 'var(--primary-glow)', borderRadius: '1.5px', marginTop: '4px' }}
+            />
+          </div>
+        </motion.div>
       )}
     </section>
   );
