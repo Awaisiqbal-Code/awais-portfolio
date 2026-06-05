@@ -431,66 +431,7 @@ const Hero = ({ onExplore, isMuted, toggleSound }) => {
             </motion.div>
           ))}
 
-          {/* ── PERSON STANDING INSIDE PORTAL ── */}
-          <div style={{
-            position: 'absolute',
-            bottom: '-8%',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '195px',
-            height: '390px',
-            zIndex: 10,
-            overflow: 'hidden',
-          }}>
-            {/* Holographic scan line sweeping over person */}
-            <div style={{
-              position: 'absolute',
-              top: 0, left: 0, right: 0,
-              height: '3px',
-              background: 'linear-gradient(90deg, transparent, rgba(0,255,255,0.9), transparent)',
-              boxShadow: '0 0 12px rgba(0,255,255,0.9)',
-              animation: 'scanSlide 3s linear infinite',
-              zIndex: 4,
-            }} />
-
-            {/* Person image — mix-blend removes white bg */}
-            <img
-              src={userPhoto}
-              alt="Awais Iqbal"
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                objectPosition: 'center top',
-                mixBlendMode: 'multiply',
-                filter: 'contrast(1.25) brightness(1.15) saturate(1.2) drop-shadow(0 0 12px rgba(0,255,255,0.5)) drop-shadow(0 0 30px rgba(123,97,255,0.4))',
-              }}
-            />
-
-            {/* Bottom fade: person blends into the ground glow */}
-            <div style={{
-              position: 'absolute',
-              bottom: 0, left: 0, right: 0,
-              height: '80px',
-              background: 'linear-gradient(to top, rgba(2,1,10,1) 0%, transparent 100%)',
-              zIndex: 5,
-            }} />
-          </div>
-
-          {/* Ground energy glow under feet */}
-          <div style={{
-            position: 'absolute',
-            bottom: '-10px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '160px',
-            height: '25px',
-            borderRadius: '50%',
-            background: 'radial-gradient(ellipse, rgba(0,255,255,0.5) 0%, transparent 70%)',
-            filter: 'blur(8px)',
-            zIndex: 9,
-            pointerEvents: 'none',
-          }} />
+          {/* Portal stands empty, highlighting the high-tech energy circles */}
         </motion.div>
       )}
 
