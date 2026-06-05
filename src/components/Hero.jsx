@@ -433,19 +433,25 @@ const Hero = ({ onExplore, isMuted, toggleSound }) => {
           ))}
 
           {/* ── HOLOGRAPHIC BRAIN INSIDE PORTAL ── */}
-          <motion.div
-            animate={{ y: [-8, 8, -8], scale: [1, 1.03, 1] }}
-            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            style={{
+          {/* Circular clip container — keeps brain inside the ring */}
+          <div style={{
+            position: 'absolute',
+            inset: '13%',
+            borderRadius: '50%',
+            overflow: 'hidden',
+            zIndex: 10,
+            pointerEvents: 'none',
+          }}>
+            {/* Radial edge fade — blends the brain edges into the portal */}
+            <div style={{
               position: 'absolute',
-              inset: '5%',
-              zIndex: 10,
+              inset: 0,
+              borderRadius: '50%',
+              background: 'radial-gradient(circle at center, transparent 55%, rgba(2,1,10,0.85) 80%, rgba(2,1,10,1) 100%)',
+              zIndex: 5,
               pointerEvents: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
+            }} />
+
             {/* Scan line sweeping over brain */}
             <div style={{
               position: 'absolute',
@@ -454,20 +460,25 @@ const Hero = ({ onExplore, isMuted, toggleSound }) => {
               background: 'linear-gradient(90deg, transparent, rgba(0,255,255,0.7), transparent)',
               boxShadow: '0 0 10px rgba(0,255,255,0.7)',
               animation: 'scanSlide 4s linear infinite',
-              zIndex: 4,
+              zIndex: 6,
             }} />
-            <img
+
+            <motion.img
               src={holoBrain}
               alt="Holographic Brain"
+              animate={{ y: [-8, 8, -8], scale: [1, 1.04, 1] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
               style={{
                 width: '100%',
                 height: '100%',
-                objectFit: 'contain',
+                objectFit: 'cover',
+                objectPosition: 'center center',
                 mixBlendMode: 'screen',
-                filter: 'brightness(1.1) contrast(1.1) drop-shadow(0 0 20px rgba(0,255,255,0.5)) drop-shadow(0 0 40px rgba(123,97,255,0.3))',
+                filter: 'brightness(1.2) contrast(1.1) saturate(1.2) drop-shadow(0 0 25px rgba(0,255,255,0.6))',
+                zIndex: 3,
               }}
             />
-          </motion.div>
+          </div>
         </motion.div>
       )}
 
